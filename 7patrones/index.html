@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rompe el Patrón | El Oráculo de Tus Sombras</title>
+    <meta name="description" content="Descubre el mensaje oculto de tu inconsciente y recupera tu poder en menos de 21 días.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Inter"', 'sans-serif'],
+                        serif: ['"Cinzel"', 'serif'],
+                        quote: ['"Playfair Display"', 'serif'],
+                    },
+                    colors: {
+                        gold: {
+                            100: '#faeec9',
+                            300: '#f5d77f',
+                            400: '#f0c043',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                        },
+                        mystic: {
+                            /* Nueva Paleta: Violeta Profundo / Berenjena Oscuro */
+                            950: '#0f0518', /* Fondo Principal: Casi negro con tinte violeta */
+                            900: '#1a0b24', /* Fondo Secundario: Morado noche profundo */
+                            800: '#241230', /* Tarjetas Oscuras */
+                            card: '#2f1a3d', /* Elementos destacados */
+                            text: '#e9d5ff', /* Texto claro con tinte lavanda muy sutil */
+                        }
+                    },
+                    backgroundImage: {
+                        /* Glow actualizado para combinar dorado con el nuevo fondo violeta */
+                        'hero-glow': 'radial-gradient(circle at center, rgba(147, 51, 234, 0.15) 0%, rgba(15, 5, 24, 0) 70%)', 
+                        'mystic-pattern': "url('https://www.transparenttextures.com/patterns/dark-matter.png')",
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.8s ease-out forwards',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'breathe': 'breathe 3s ease-in-out infinite',
+                        'heartbeat': 'heartbeat 1.5s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        breathe: {
+                            '0%, 100%': { transform: 'scale(1)', boxShadow: '0 0 15px rgba(234,179,8,0.1)' },
+                            '50%': { transform: 'scale(1.03)', boxShadow: '0 0 30px rgba(234,179,8,0.4)' },
+                        },
+                        heartbeat: {
+                            '0%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(234, 179, 8, 0.4)' },
+                            '15%': { transform: 'scale(1.05)', boxShadow: '0 0 20px 10px rgba(234, 179, 8, 0.2)' },
+                            '30%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(234, 179, 8, 0.4)' },
+                            '45%': { transform: 'scale(1.05)', boxShadow: '0 0 20px 10px rgba(234, 179, 8, 0.2)' },
+                            '60%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0f0518; /* Fondo base actualizado */
+            color: #e9d5ff; /* Texto base suavizado (lavanda muy claro) */
+        }
+        
+        .text-gold-gradient {
+            background: linear-gradient(to right, #fde68a, #d97706);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(to right, #ca8a04, #854d0e);
+            border: 1px solid rgba(253, 230, 138, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(to right, #eab308, #a16207);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(234, 179, 8, 0.4);
+        }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Acordeón para FAQ */
+        .accordion-content {
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- 1. ENCABEZADO (La Promesa) -->
+    <header class="relative pt-24 pb-20 lg:pt-32 lg:pb-32 overflow-hidden">
+        <!-- Fondo Gradient Hero Actualizado -->
+        <div class="absolute inset-0 bg-hero-glow z-0"></div>
+        <!-- Orbes decorativos con tono amatista -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-purple-600/10 rounded-full blur-[100px] -z-10"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+            
+            <p class="font-sans text-gold-400 tracking-[0.1em] uppercase text-xs md:text-sm mb-6 font-bold animate-fade-up">
+                ¿Sigues repitiendo los mismos errores en tus relaciones sin saber por qué?
+            </p>
+
+            <h1 class="font-serif text-5xl md:text-7xl leading-tight text-white mb-6 animate-fade-up" style="animation-delay: 0.1s;">
+                ¿Misma historia, <br />
+                <span class="text-gold-gradient italic">diferente cara?</span>
+            </h1>
+
+            <div class="max-w-2xl mx-auto mb-10 animate-fade-up space-y-4" style="animation-delay: 0.2s;">
+                <p class="font-sans text-xl md:text-2xl text-white font-bold">
+                    ¿Todo acaba sin saber por qué?
+                </p>
+                <p class="font-sans text-lg text-mystic-text leading-relaxed opacity-90">
+                    Descubre el mensaje oculto de tu inconsciente y recupera tu poder en menos de <span class="text-gold-400 font-semibold">21 días</span> con el Oráculo de tus sombras.
+                </p>
+            </div>
+
+            <div class="flex flex-col items-center animate-fade-up" style="animation-delay: 0.3s;">
+                <!-- Botón redondeado -->
+                <a href="#oferta" class="btn-primary text-white font-serif tracking-widest px-8 py-5 rounded-full text-lg w-full sm:w-auto shadow-lg uppercase font-bold hover:shadow-purple-900/50">
+                    SÍ, QUIERO ROMPER MI PATRÓN POR $11.11 USD
+                </a>
+                <p class="text-xs text-mystic-text mt-3 uppercase tracking-wider opacity-70">
+                    <span class="text-gold-500">★</span> Oferta de Lanzamiento por tiempo limitado <span class="text-gold-500">★</span>
+                </p>
+            </div>
+            
+        </div>
+    </header>
+
+    <!-- 2. DIAGNÓSTICO RÁPIDO -->
+    <section class="py-20 bg-mystic-900 border-t border-white/5 relative">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-12 reveal-on-scroll">
+                <span class="text-gold-500 text-xs tracking-widest uppercase font-bold">Diagnóstico Rápido</span>
+                <h2 class="font-serif text-3xl text-white mt-2 mb-4">Descubre si tu patrón está activo</h2>
+                <p class="text-mystic-text opacity-80">Responde con sinceridad (Sí/No) a estas preguntas del oráculo:</p>
+            </div>
+
+            <div class="bg-mystic-950 p-8 rounded-lg border border-purple-500/20 shadow-2xl reveal-on-scroll">
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <span class="text-gold-500 mt-1">✦</span>
+                        <p class="text-mystic-text text-sm opacity-90">¿Sientes que das mucho más de lo que recibes en tus relaciones?</p>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-gold-500 mt-1">✦</span>
+                        <p class="text-mystic-text text-sm opacity-90">¿Te atraen personas emocionalmente no disponibles o distantes?</p>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-gold-500 mt-1">✦</span>
+                        <p class="text-mystic-text text-sm opacity-90">¿Sientes culpa cuando intentas poner límites o decir "no"?</p>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-gold-500 mt-1">✦</span>
+                        <p class="text-mystic-text text-sm opacity-90">¿Tienes miedo a que si te muestras tal cual eres, te dejarán de querer?</p>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="text-gold-500 mt-1">✦</span>
+                        <p class="text-mystic-text text-sm opacity-90">¿Repites las mismas discusiones con parejas diferentes?</p>
+                    </li>
+                </ul>
+                <div class="mt-8 pt-6 border-t border-white/5 text-center">
+                    <p class="text-white italic font-serif mb-6">"Si respondiste SÍ a más de 2 preguntas, tu Arquetipo de Sombra está controlando tu vida amorosa."</p>
+                    
+                    <div class="mb-4">
+                        <p class="text-mystic-text text-xs uppercase tracking-widest mb-2 opacity-70">¿Buscas respuestas más profundas?</p>
+                        <p class="text-mystic-text text-sm mb-4 opacity-90">Si prefieres ir a la raíz y descubrir exactamente cuál es tu arquetipo:</p>
+                    </div>
+
+                    <!-- Botón Outline con animación de respiración -->
+                    <a href="https://diagnostico-2hl.pages.dev/" target="_blank" class="inline-block px-8 py-4 border border-gold-500 text-gold-400 hover:bg-gold-500 hover:text-black font-bold rounded-full transition-all duration-300 text-sm uppercase tracking-widest shadow-[0_0_15px_rgba(234,179,8,0.1)] animate-breathe">
+                        Realizar Diagnóstico Avanzado y Preciso (Gratis)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. LA CONEXIÓN (Empatía y Autoridad) -->
+    <section class="py-24 bg-mystic-950 relative">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
+            <!-- Foto de Leo (Placeholder) -->
+            <div class="w-full md:w-1/3 reveal-on-scroll">
+                <div class="aspect-[3/4] bg-mystic-800 rounded-lg overflow-hidden border border-gold-500/20 relative shadow-2xl">
+                    <!-- Placeholder image for Leo -->
+                    <img src="leo-pefil.jpg" alt="Leo" class="w-full h-full object-cover opacity-80 grayscale hover:grayscale-0 transition-all duration-700">
+                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-mystic-950 to-transparent p-4">
+                        <span class="text-white font-serif text-xl block">Soy Leo</span>
+                        <span class="text-gold-500 text-xs tracking-wider">Tu Guía en este viaje</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historia -->
+            <div class="w-full md:w-2/3 reveal-on-scroll">
+                <h2 class="font-serif text-3xl text-white mb-6">¿Por qué hay mujeres maravillosas que siguen llorando por hombres que no las merecen?</h2>
+                <div class="space-y-6 text-mystic-text leading-relaxed font-light opacity-90">
+                    <p>
+                        A lo largo de estos años creando contenido y tras realizar más de <strong>10,000 lecturas personales</strong>, esa pregunta siempre rondaba mi cabeza.
+                    </p>
+                    <p>
+                        Las cartas siempre me mostraron la respuesta. No era el destino. No era un castigo divino. <span class="text-white font-medium border-b border-gold-500/50">Era un programa mental.</span>
+                    </p>
+                    <p>
+                        Descubrí que existen <strong>7 Arquetipos de Sombra</strong>. Disfraces que nos ponemos de niñas para sobrevivir, pero que de adultas nos impiden ser amadas.
+                    </p>
+                    <blockquote class="border-l-4 border-gold-500 pl-6 py-2 my-8 font-quote italic text-xl text-gold-100 bg-white/5 rounded-r-lg">
+                        "Mientras no te quites ese disfraz, seguirás atrayendo al mismo actor para tu obra de teatro, aunque le cambies el nombre."
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. LA SOLUCIÓN (Producto) -->
+    <section class="py-24 bg-mystic-900 border-y border-white/5 overflow-hidden">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <span class="text-mystic-text uppercase tracking-[0.2em] text-sm block mb-4 reveal-on-scroll opacity-60">Presentamos</span>
+            
+            <div class="relative inline-block reveal-on-scroll">
+                <!-- Efecto de resplandor dorado/violeta detrás del libro -->
+                <div class="absolute inset-0 bg-purple-500/20 blur-[50px] rounded-full transform scale-110"></div>
+                
+                <!-- Contenedor de la Imagen del Libro -->
+                <div class="relative w-64 md:w-80 mx-auto transform hover:scale-105 transition-transform duration-500 z-10">
+                    <img src="logo libro (1).png" alt="Portada El Oráculo de Tus Sombras" class="w-full h-auto">
+                </div>
+            </div>
+
+            <h2 class="font-serif text-4xl md:text-5xl text-white mt-12 mb-6 reveal-on-scroll">
+                EL ORÁCULO DE TUS SOMBRAS
+            </h2>
+            <p class="text-xl text-gold-400 mb-8 font-serif reveal-on-scroll">Guía Práctica de 21 Días para Romper tus Bloqueos Amorosos</p>
+            
+            <p class="max-w-2xl mx-auto text-mystic-text mb-12 reveal-on-scroll opacity-90">
+                Esto no es solo un libro digital. <strong class="text-white">Es un Ritual de Exorcismo Emocional.</strong><br>
+                No te voy a dar teoría aburrida. Vamos a usar la sabiduría del Tarot y la psicología práctica para ir a la raíz de tu dolor y arrancarla.
+            </p>
+        </div>
+    </section>
+
+    <!-- 5. BENEFICIOS -->
+    <section class="py-20 bg-mystic-950">
+        <div class="max-w-5xl mx-auto px-4">
+            <h3 class="font-serif text-3xl text-white text-center mb-16 reveal-on-scroll">Lo que vas a lograr</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Beneficio 1 -->
+                <div class="flex gap-4 reveal-on-scroll">
+                    <div class="w-12 h-12 bg-mystic-800 rounded-full flex items-center justify-center border border-purple-500/30 shrink-0">
+                        <span class="text-xl">🎭</span>
+                    </div>
+                    <div>
+                        <h4 class="text-gold-100 font-bold mb-2">Descubrirás cuál de los 7 Patrones te domina</h4>
+                        <p class="text-mystic-text text-sm opacity-80">¿Eres La Salvadora? ¿La Complaciente? ¿La Controladora? Ponerle nombre es el primer paso para sanar.</p>
+                    </div>
+                </div>
+                <!-- Beneficio 2 -->
+                <div class="flex gap-4 reveal-on-scroll" style="transition-delay: 0.1s;">
+                    <div class="w-12 h-12 bg-mystic-800 rounded-full flex items-center justify-center border border-purple-500/30 shrink-0">
+                        <span class="text-xl">🌱</span>
+                    </div>
+                    <div>
+                        <h4 class="text-gold-100 font-bold mb-2">Entenderás el origen</h4>
+                        <p class="text-mystic-text text-sm opacity-80">Sanarás a tu niña interior que creó ese mecanismo de defensa para protegerse.</p>
+                    </div>
+                </div>
+                <!-- Beneficio 3 -->
+                <div class="flex gap-4 reveal-on-scroll" style="transition-delay: 0.2s;">
+                    <div class="w-12 h-12 bg-mystic-800 rounded-full flex items-center justify-center border border-purple-500/30 shrink-0">
+                        <span class="text-xl">🛡️</span>
+                    </div>
+                    <div>
+                        <h4 class="text-gold-100 font-bold mb-2">Aprenderás a poner Límites Sagrados</h4>
+                        <p class="text-mystic-text text-sm opacity-80">Dejarás de decir "sí" cuando tu alma grita "no". Recuperarás tu respeto.</p>
+                    </div>
+                </div>
+                <!-- Beneficio 4 -->
+                <div class="flex gap-4 reveal-on-scroll" style="transition-delay: 0.3s;">
+                    <div class="w-12 h-12 bg-mystic-800 rounded-full flex items-center justify-center border border-purple-500/30 shrink-0">
+                        <span class="text-xl">🧲</span>
+                    </div>
+                    <div>
+                        <h4 class="text-gold-100 font-bold mb-2">Te convertirás en un Imán</h4>
+                        <p class="text-mystic-text text-sm opacity-80">Dejarás de perseguir amor para empezar a atraerlo por quién eres realmente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. MÓDULOS -->
+    <section class="py-24 bg-mystic-900 border-t border-white/5">
+        <div class="max-w-4xl mx-auto px-4">
+            <h3 class="font-serif text-3xl text-white text-center mb-12 reveal-on-scroll">¿Qué incluye la guía?</h3>
+            
+            <div class="space-y-6">
+                <!-- Modulo 1 -->
+                <div class="bg-mystic-950 p-6 rounded-lg border border-purple-500/20 hover:border-gold-500/40 transition-colors reveal-on-scroll">
+                    <h4 class="text-gold-400 font-serif text-lg mb-2">Módulo 1 — Diagnóstico: Conoce tu patrón</h4>
+                    <p class="text-mystic-text text-sm mb-2 opacity-90">Realiza el quiz y descubre cuál es tu patrón dominante y secundario.</p>
+                    <p class="text-mystic-text text-xs italic opacity-60">Resultado claro y personalizado para empezar a trabajar desde el punto exacto que te duele.</p>
+                </div>
+                
+                <!-- Modulo 2 -->
+                <div class="bg-mystic-950 p-6 rounded-lg border border-purple-500/20 hover:border-gold-500/40 transition-colors reveal-on-scroll">
+                    <h4 class="text-gold-400 font-serif text-lg mb-2">Módulo 2 — Los 7 patrones: Identifica cómo te sabotean</h4>
+                    <p class="text-mystic-text text-sm mb-2 opacity-90">Explicación práctica de cada patrón: señales, raíz emocional y ejemplos reales.</p>
+                    <p class="text-mystic-text text-xs italic opacity-60">Te ayudará a reconocer en 2–3 minutos qué dinámicas repites y por qué.</p>
+                </div>
+                
+                <!-- Modulo 3 -->
+                <div class="bg-mystic-950 p-6 rounded-lg border border-purple-500/20 hover:border-gold-500/40 transition-colors reveal-on-scroll">
+                    <h4 class="text-gold-400 font-serif text-lg mb-2">Módulo 3 — Estrategias de liberación: Herramientas prácticas</h4>
+                    <p class="text-mystic-text text-sm mb-2 opacity-90">Técnicas concretas, ejercicios y scripts para responder distinto cuando el patrón se activa.</p>
+                    <p class="text-mystic-text text-xs italic opacity-60">Incluye prácticas diarias, frases guía y mini-ejercicios para usar en tiempo real.</p>
+                </div>
+                
+                <!-- Modulo 4 -->
+                <div class="bg-mystic-950 p-6 rounded-lg border border-purple-500/20 hover:border-gold-500/40 transition-colors reveal-on-scroll">
+                    <h4 class="text-gold-400 font-serif text-lg mb-2">Módulo 4 — Plan de 21 días: Reprograma tu respuesta emocional</h4>
+                    <p class="text-mystic-text text-sm mb-2 opacity-90">Rutina paso a paso para desactivar el patrón en 3 semanas con tareas diarias y checkpoints.</p>
+                    <p class="text-mystic-text text-xs italic opacity-60">Acompañado de audios de manifestación y ejercicios de integración para el subconsciente.</p>
+                </div>
+                
+                <!-- Modulo 5 -->
+                <div class="bg-mystic-950 p-6 rounded-lg border border-purple-500/20 hover:border-gold-500/40 transition-colors reveal-on-scroll">
+                    <h4 class="text-gold-400 font-serif text-lg mb-2">Módulo 5 — Sostén y crecimiento: Mantén el cambio en el tiempo</h4>
+                    <p class="text-mystic-text text-sm mb-2 opacity-90">Estrategias para prevenir recaídas, construir límites y elegir relaciones saludables.</p>
+                    <p class="text-mystic-text text-xs italic opacity-60">Recursos, plantillas y una hoja de ruta para seguir avanzando después del programa.</p>
+                </div>
+                
+                <!-- Bonus -->
+                <div class="bg-gradient-to-r from-mystic-900 to-mystic-800 p-6 rounded-lg border border-gold-500/40 shadow-lg reveal-on-scroll transform scale-105">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="bg-gold-500 text-black text-xs font-bold px-2 py-0.5 rounded">BONUS EXCLUSIVO</span>
+                    </div>
+                    <h4 class="text-white font-serif text-lg mb-2">Meditacion Guiada MP3</h4>
+                    <p class="text-mystic-text text-sm opacity-90">Audio de Meditación Guiada: Atrae el Amor Sano. Para hablarle directamente a tu subconsciente y borrar la raiz del dolor.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. TESTIMONIOS (Adelantados para generar confianza antes del precio) -->
+    <section class="py-24 bg-mystic-text text-mystic-950">
+        <div class="max-w-6xl mx-auto px-4">
+            <h3 class="font-serif text-3xl text-center mb-4">Lo que dicen las mujeres que ya han despertado</h3>
+            <p class="text-center text-mystic-900 mb-12 max-w-2xl mx-auto opacity-80">Cree en las historias de mujeres que, como tú, pensaban que su destino estaba "maldito" hasta que descubrieron su patrón.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonio 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-purple-100">
+                    <div class="flex text-gold-500 mb-4">★★★★★</div>
+                    <h4 class="font-serif font-bold text-lg mb-3">La que dejó de ser "La Salvadora"</h4>
+                    <p class="text-gray-700 text-sm italic mb-4">"Llegué destrozada... En el Test de Patrones me salió que era una 'Salvadora'. Fue como un balde de agua fría. Entendí que yo no buscaba amor, buscaba sentirme útil. Gracias al Módulo 2, hoy estoy con un chico estable que no necesita que lo salve."</p>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                         <!-- Placeholder avatar -->
+                        <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden"><img src="https://randomuser.me/api/portraits/women/53.jpg" class="w-full h-full object-cover"></div>
+                        <div>
+                            <p class="font-bold text-xs text-gray-900">Carolina M., 36 años</p>
+                            <p class="text-[10px] text-gray-500">Patrón: La Salvadora</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonio 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-purple-100">
+                    <div class="flex text-gold-500 mb-4">★★★★★</div>
+                    <h4 class="font-serif font-bold text-lg mb-3">La que rompió el apego ansioso</h4>
+                    <p class="text-gray-700 text-sm italic mb-4">"Mi ansiedad era horrible. Si no contestaba en 5 minutos, imaginaba lo peor. La guía me abrió los ojos: mi patrón de 'La Controladora' asfixiaba el amor. El ejercicio del 'Río de la Vida' me enseñó a soltar. Ahora él está más presente que nunca."</p>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden"><img src="https://randomuser.me/api/portraits/women/65.jpg" class="w-full h-full object-cover"></div>
+                        <div>
+                            <p class="font-bold text-xs text-gray-900">Valeria R., 29 años</p>
+                            <p class="text-[10px] text-gray-500">Patrón: La Controladora</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonio 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-purple-100">
+                    <div class="flex text-gold-500 mb-4">★★★★★</div>
+                    <h4 class="font-serif font-bold text-lg mb-3">La que se quitó la venda</h4>
+                    <p class="text-gray-700 text-sm italic mb-4">"Yo siempre justificaba lo injustificable. Leo me enseñó que estaba enamorada de una fantasía (7 de Copas). Hice la carta de despedida al patrón y al día siguiente tuve la fuerza para poner contacto cero. Me siento dueña de mi vida."</p>
+                    <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                        <div class="w-10 h-10 bg-gray-300 rounded-full overflow-hidden"><img src="https://randomuser.me/api/portraits/women/61.jpg" class="w-full h-full object-cover"></div>
+                        <div>
+                            <p class="font-bold text-xs text-gray-900">Andrea G., 41 años</p>
+                            <p class="text-[10px] text-gray-500">Patrón: La Idealizadora</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. LA OFERTA IRRESISTIBLE -->
+    <section id="oferta" class="py-24 bg-black relative overflow-hidden">
+        <div class="absolute inset-0 bg-gold-500/5 z-0"></div>
+        <div class="absolute -top-20 -right-20 w-96 h-96 bg-gold-600/10 rounded-full blur-[100px]"></div>
+
+        <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+            
+            <div class="bg-mystic-950 border border-purple-500/30 rounded-2xl p-8 md:p-16 shadow-[0_0_50px_rgba(202,138,4,0.1)] reveal-on-scroll">
+                
+                <p class="text-mystic-text mb-6 text-sm opacity-70">
+                    Una sesión privada conmigo cuesta <span class="line-through">$40 USD</span>.<br>
+                    Esta guía contiene la esencia de mis sesiones más intensas.
+                </p>
+                
+                <h3 class="font-serif text-2xl text-white mb-4">Mi misión es que NINGUNA mujer se quede sin sanar por dinero.</h3>
+                <p class="text-gold-100 mb-8 font-light">Por eso, por tiempo limitado, accede a todo el sistema por un precio simbólico.</p>
+                
+                <div class="flex flex-col items-center justify-center mb-8">
+                    <span class="text-mystic-text text-xl line-through font-serif opacity-50">Precio Normal: $47 USD</span>
+                    <div class="flex items-baseline gap-2 mt-2">
+                        <span class="text-mystic-text text-xl font-bold uppercase opacity-80">Hoy por solo:</span>
+                        <span class="text-6xl md:text-7xl font-serif font-bold text-gold-500">$11.11</span>
+                        <span class="text-mystic-text text-xl opacity-60">USD</span>
+                    </div>
+                    <span class="bg-green-900/50 text-green-400 text-xs px-3 py-1 rounded-full mt-4 border border-green-500/30 animate-pulse">
+                        ● Acceso Inmediato y de por vida
+                    </span>
+                </div>
+
+                <!-- BOTÓN CTA FINAL CON ENLACE DE HOTMART -->
+<a href="https://pay.hotmart.com/P103021177R?checkoutMode=10" class="btn-primary w-full md:w-auto px-8 md:px-16 py-4 md:py-5 rounded-full text-white font-bold text-lg md:text-xl tracking-widest shadow-[0_0_30px_rgba(234,179,8,0.3)] hover:shadow-[0_0_50px_rgba(234,179,8,0.5)] transition-all uppercase mb-4 animate-heartbeat text-center block">
+    ¡SI, QUIERO EMPEZAR MI CAMBIO!
+</a>
+                
+                <div class="flex justify-center items-center gap-2 text-mystic-text text-xs opacity-60">
+                    <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                    Pago 100% Seguro vía Hotmart
+                </div>
+
+                <!-- 8. GARANTÍA -->
+                <div class="mt-12 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center gap-6 justify-center text-left max-w-2xl mx-auto">
+                    <div class="w-20 h-20 shrink-0 bg-gold-100 rounded-full flex items-center justify-center text-3xl shadow-lg">
+                        🏆
+                    </div>
+                    <div>
+                        <h4 class="text-white font-bold font-serif">Garantía de "Claridad Total" de 7 Días</h4>
+                        <p class="text-mystic-text text-xs mt-2 leading-relaxed opacity-80">
+                            Descarga la guía, lee los primeros módulos y haz el test. Si sientes que esto no resuena contigo, te devuelvo el 100% de tu dinero. Sin preguntas. El riesgo es mío. Tu sanación es lo único que importa.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="py-20 bg-mystic-900 border-t border-white/5">
+        <div class="max-w-3xl mx-auto px-4">
+            <h3 class="font-serif text-3xl text-white text-center mb-12">Preguntas Frecuentes</h3>
+            
+            <div class="space-y-4">
+                <!-- FAQ 1 -->
+                <div class="border-b border-white/10 pb-4">
+                    <button class="w-full text-left flex justify-between items-center text-white hover:text-gold-400 font-medium py-2 focus:outline-none" onclick="toggleAccordion(1)">
+                        <span>¿Es un libro físico?</span>
+                        <span id="icon-1" class="text-gold-500 transition-transform duration-300">+</span>
+                    </button>
+                    <div id="content-1" class="accordion-content text-mystic-text text-sm opacity-80">
+                        <p class="py-2">No, es una guía digital (PDF) que puedes descargar en tu celular, tablet o computadora inmediatamente después del pago.</p>
+                    </div>
+                </div>
+                <!-- FAQ 2 -->
+                <div class="border-b border-white/10 pb-4">
+                    <button class="w-full text-left flex justify-between items-center text-white hover:text-gold-400 font-medium py-2 focus:outline-none" onclick="toggleAccordion(2)">
+                        <span>¿Necesito saber de Tarot?</span>
+                        <span id="icon-2" class="text-gold-500 transition-transform duration-300">+</span>
+                    </button>
+                    <div id="content-2" class="accordion-content text-mystic-text text-sm opacity-80">
+                        <p class="py-2">Para nada. Yo uso el Tarot como herramienta de explicación psicológica y arquetípica, pero la guía es 100% práctica. Es para cualquier mujer.</p>
+                    </div>
+                </div>
+                <!-- FAQ 3 -->
+                <div class="border-b border-white/10 pb-4">
+                    <button class="w-full text-left flex justify-between items-center text-white hover:text-gold-400 font-medium py-2 focus:outline-none" onclick="toggleAccordion(3)">
+                        <span>¿Cómo me llega?</span>
+                        <span id="icon-3" class="text-gold-500 transition-transform duration-300">+</span>
+                    </button>
+                    <div id="content-3" class="accordion-content text-mystic-text text-sm opacity-80">
+                        <p class="py-2">Al realizar el pago seguro en Hotmart, te llegará un correo automático e inmediato con el enlace de descarga.</p>
+                    </div>
+                </div>
+                <!-- FAQ 4 -->
+                <div class="border-b border-white/10 pb-4">
+                    <button class="w-full text-left flex justify-between items-center text-white hover:text-gold-400 font-medium py-2 focus:outline-none" onclick="toggleAccordion(4)">
+                        <span>¿Sirve si estoy soltera o en pareja?</span>
+                        <span id="icon-4" class="text-gold-500 transition-transform duration-300">+</span>
+                    </button>
+                    <div id="content-4" class="accordion-content text-mystic-text text-sm opacity-80">
+                        <p class="py-2">Sirve para ambas. Si estás soltera, te prepara para no repetir errores y elegir mejor. Si estás en pareja, te ayuda a sanar la dinámica tóxica actual desde tu propio cambio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 11. CIERRE FINAL -->
+    <section class="py-20 bg-black text-center border-t border-white/10">
+        <div class="max-w-2xl mx-auto px-4 animate-pulse-slow">
+            <h2 class="font-serif text-2xl md:text-3xl text-white mb-4">No dejes que pase otro año repitiendo la misma historia.</h2>
+            <p class="text-mystic-text mb-8 opacity-80">Tu "Yo del futuro" te está suplicando que tomes una decisión diferente hoy.</p>
+            <p class="font-serif text-gold-500 text-xl italic mb-8">Rompe el patrón. Despierta tu magia.</p>
+            
+            <a href="#oferta" class="inline-block bg-white text-black font-bold px-10 py-4 rounded-full hover:bg-gold-100 transition-colors shadow-lg shadow-white/10 uppercase tracking-widest text-sm">
+                Quiero empezar mi cambio ahora
+            </a>
+            
+            <p class="mt-12 text-[10px] text-stone-700 max-w-lg mx-auto">
+                Descargo de responsabilidad: Este producto no sustituye la terapia psicológica profesional. Los resultados pueden variar. Al comprar aceptas los términos y condiciones de Hotmart.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer Simple -->
+    <footer class="bg-black py-8 border-t border-white/5 text-center text-stone-600 text-xs">
+        <p>&copy; 2025 Rompe el Patrón. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Reveal on Scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal-on-scroll");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("is-visible");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        reveal();
+
+        // Acordeón Logic
+        function toggleAccordion(id) {
+            const content = document.getElementById(`content-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+            
+            // Cerrar otros (opcional, para comportamiento de acordeón estricto)
+            // document.querySelectorAll('.accordion-content').forEach(el => {
+            //     if(el !== content) { el.style.maxHeight = null; el.classList.remove('active'); }
+            // });
+
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                content.classList.remove('active');
+                icon.style.transform = "rotate(0deg)";
+                icon.innerText = "+";
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.classList.add('active');
+                icon.style.transform = "rotate(45deg)"; // Opcional rotación
+                icon.innerText = "-";
+            }
+        }
+    </script>
+</body>
+</html>

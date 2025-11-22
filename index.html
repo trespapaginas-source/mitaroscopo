@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TAROSCOPO® | Las Cartas Tienen Tu Respuesta</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            /* Fondo Berenjena Limpio y Profundo */
+            background: radial-gradient(circle at center top, #2e0b28 0%, #150312 60%, #000000 100%);
+            background-attachment: fixed;
+            color: #f3e8ff;
+            overflow-x: hidden;
+            position: relative;
+        }
+        h1, h2, h3, h4, h5, .serif-font {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a0518;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D4AF37;
+            border-radius: 4px;
+        }
+
+        /* Accordion */
+        .accordion-content {
+            transition: max-height 0.4s ease-in-out, opacity 0.4s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .accordion-content.active {
+            opacity: 1;
+        }
+        
+        /* Card Styles */
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: linear-gradient(180deg, rgba(46, 11, 40, 0.8) 0%, rgba(20, 3, 18, 0.9) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(253, 224, 71, 0.15);
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px -10px rgba(253, 224, 71, 0.2);
+            border-color: rgba(253, 224, 71, 0.5);
+        }
+
+        /* --- LUXURY GOLD TEXT --- */
+        .text-gold-intense {
+            background: linear-gradient(to right, #FDB931, #FFFFAC, #D1B464, #FFFFAC, #FDB931);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            filter: drop-shadow(0 0 2px rgba(253, 224, 71, 0.3));
+            background-size: 200% auto;
+            animation: shine-text 8s linear infinite;
+        }
+        @keyframes shine-text { to { background-position: 200% center; } }
+
+        /* --- LUXURY BUTTON --- */
+        .bg-gold-luxury {
+             background: linear-gradient(45deg, #FFD700, #FFFFE0, #FFC107, #FFFFE0, #FFD700);
+             background-size: 200% auto;
+             transition: 0.5s;
+             color: #3b0d36;
+             box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+             animation: shine-bg 4s linear infinite;
+        }
+        .bg-gold-luxury:hover {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.7);
+            transform: scale(1.05);
+        }
+        @keyframes shine-bg { to { background-position: 200% center; } }
+
+        /* --- ANIMATION 3: FLOATING SYMBOLS (COINS/CUPS) --- */
+        .floating-symbol {
+            position: absolute;
+            color: rgba(255, 215, 0, 0.15);
+            animation: float-symbol 10s infinite ease-in-out;
+            z-index: -1;
+        }
+        @keyframes float-symbol {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        /* Button Shine */
+        .btn-shine { position: relative; overflow: hidden; }
+        .btn-shine::after {
+            content: ''; position: absolute; top: 0; left: -120%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
+            transform: skewX(-25deg); animation: shine 5s infinite;
+        }
+        @keyframes shine { 0% { left: -120%; } 20% { left: 200%; } 100% { left: 200%; } }
+        
+        .section-divider {
+            height: 1px; background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.5), transparent);
+            margin: 2rem auto; width: 80%;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 bg-[#150312]/90 backdrop-blur-md border-b border-white/10 py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="text-xl font-bold tracking-widest text-gold-intense filter drop-shadow-md">TAROSCOPO®</div>
+            <a href="#lecturas-destacadas" class="bg-white text-[#2E0B28] px-5 py-2 rounded-full text-sm font-bold hover:bg-yellow-50 transition duration-300 shadow-[0_0_15px_rgba(255,255,255,0.3)]">
+                ¡Reservar mi lectura!
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 px-6 text-center flex flex-col items-center justify-center min-h-[90vh] overflow-hidden">
+        
+        <!-- Animación de Eclipse ELIMINADA como solicitaste -->
+
+        <!-- Floating Particle (Small Star) -->
+        <i class="fas fa-star floating-symbol text-xl top-[20%] left-[15%]" style="animation-delay: 1s;"></i>
+        <i class="fas fa-star floating-symbol text-sm top-[30%] right-[20%]" style="animation-delay: 3s;"></i>
+
+        <!-- Badge con mensaje de autoridad -->
+        <div data-aos="fade-up" class="mb-8 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-yellow-400/30 bg-[#3b0d36]/50 backdrop-blur-sm shadow-[0_0_20px_rgba(255,215,0,0.15)]">
+            <span class="text-yellow-300 text-lg animate-pulse">★ 4,9</span>
+            <span class="text-pink-50 text-sm font-light">| Deja de suponer. Empieza a saber.</span>
+        </div>
+
+        <!-- Título con Copywriting Agresivo -->
+        <h1 data-aos="fade-up" data-aos-delay="100" class="text-5xl md:text-7xl font-bold mb-8 leading-tight text-gold-intense drop-shadow-[0_0_10px_rgba(255,215,0,0.3)]">
+            ¿Vas a Seguir Esperando <br> <span class="italic font-light text-white drop-shadow-none">O Vas a Tomar el Control?</span>
+        </h1>
+
+        <!-- Subtítulo enfocado en el deseo y el dolor -->
+        <p data-aos="fade-up" data-aos-delay="200" class="text-pink-100/90 text-lg mb-10 max-w-xl mx-auto font-light">
+            El tiempo no lo cura todo; la verdad sí. Mis clientas no pagan solo por cartas, pagan por la <strong>paz mental inmediata</strong> de descubrir por fin lo que estaba oculto. Es tu turno de tener el control.
+        </p>
+
+        <a href="#mas-elegida" data-aos="zoom-in" data-aos-delay="300" class="btn-shine bg-white text-[#2E0B28] px-12 py-4 rounded-full text-lg font-bold hover:scale-105 transition transform shadow-[0_0_40px_rgba(255,255,255,0.4)] border border-white">
+            SÍ, QUIERO LA VERDAD
+        </a>
+
+        <div data-aos="fade-up" data-aos-delay="400" class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-4xl border-t border-yellow-500/30 pt-8 relative z-10">
+            <div>
+                <h3 class="text-3xl font-bold serif-font text-gold-intense">4,5/5</h3>
+                <p class="text-pink-100/80 text-xs uppercase tracking-widest mt-2">Calificación Promedio</p>
+            </div>
+            <div>
+                <h3 class="text-3xl font-bold serif-font text-gold-intense">8.247+</h3>
+                <p class="text-pink-100/80 text-xs uppercase tracking-widest mt-2">Mujeres Guiadas</p>
+            </div>
+            <div>
+                <h3 class="text-3xl font-bold serif-font text-gold-intense">95%</h3>
+                <p class="text-pink-100/80 text-xs uppercase tracking-widest mt-2">Regresan Por Mas</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Awareness Section -->
+    <section class="py-24 px-6 relative overflow-hidden">
+        <!-- Floating Symbol -->
+        <i class="fas fa-star floating-symbol text-2xl top-10 right-10 opacity-20"></i>
+
+        <div class="container mx-auto max-w-3xl relative z-10">
+            <div class="text-center mb-16">
+                <h2 data-aos="fade-up" class="text-3xl md:text-4xl font-bold mb-4 text-white">Cada día que esperas es un día más sin respuestas</h2>
+                <p data-aos="fade-up" class="text-pink-100/90 italic font-serif text-lg">Tu futuro se construye con las decisiones que tomas HOY.</p>
+            </div>
+
+            <div class="service-card rounded-2xl p-8 md:p-12 shadow-2xl" data-aos="fade-up">
+                <h3 class="text-2xl md:text-3xl font-bold mb-10 text-center text-gold-intense">¿Esto te suena <span class="italic text-white font-serif drop-shadow-none">familiar...?</span></h3>
+                <ul class="space-y-6">
+                    <li class="flex items-start gap-4">
+                        <span class="text-yellow-400 text-xl mt-1 drop-shadow-sm">✓</span>
+                        <p class="text-pink-50 text-lg font-light">Te juras que ya lo superaste, pero sientes que todavía hay algo dentro que duele.</p>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <span class="text-yellow-400 text-xl mt-1 drop-shadow-sm">✓</span>
+                        <p class="text-pink-50 text-lg font-light">Te preguntas si alguna vez fue real o solo eras tú idealizándolo.</p>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <span class="text-yellow-400 text-xl mt-1 drop-shadow-sm">✓</span>
+                        <p class="text-pink-50 text-lg font-light">Estás cansada de ser siempre "la comprensiva", pero cuando tú necesitas comprensión, no hay nadie.</p>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <span class="text-yellow-400 text-xl mt-1 drop-shadow-sm">✓</span>
+                        <p class="text-pink-50 text-lg font-light">Quieres soltar… pero parte de ti aún quiere respuestas.</p>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <span class="text-yellow-400 text-xl mt-1 drop-shadow-sm">✓</span>
+                        <p class="text-pink-50 text-lg font-light">Hay algo que te frena para avanzar en tu vida, pero no puedes identificar exactamente qué es.</p>
+                    </li>
+                    <li class="flex items-start gap-4">
+                        <span class="text-yellow-400 text-xl mt-1 drop-shadow-sm">✓</span>
+                        <p class="text-pink-50 text-lg font-light">Eres la que siempre entiende, perdona y cede, pero nunca recibes esa misma energía.</p>
+                    </li>
+                </ul>
+                <div class="mt-12 pt-8 border-t border-white/10 text-center">
+                    <p class="text-pink-200 italic font-serif text-lg">
+                        Si algo de esto te suena familiar, <strong class="text-white">tranquila.</strong> Muchas de mis clientas llegaron sintiendo exactamente <strong class="text-white">lo mismo que tú.</strong> Pero hoy, tienes la <strong class="text-gold-intense">posibilidad</strong> de salir de la incertidumbre de una vez por todas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Leo Section -->
+    <section class="py-24 px-6 relative">
+        <div class="container mx-auto max-w-6xl flex flex-col md:flex-row items-center gap-16 relative z-10">
+            <div class="w-full md:w-1/2" data-aos="fade-right">
+                <div class="relative">
+                    <div class="absolute inset-0 bg-yellow-500/20 blur-[50px] rounded-full"></div>
+                    <img src="https://framerusercontent.com/images/STuEYTYA9BVjWXo9AFoS1wXemI.jpeg?width=1600&height=1600" onerror="this.src='https://images.unsplash.com/photo-1518882570151-1d5d482d6528?auto=format&fit=crop&w=800&q=80'" alt="Leo Tarot" class="relative rounded-2xl shadow-[0_0_30px_rgba(255,215,0,0.2)] grayscale hover:grayscale-0 transition duration-700 w-full object-cover aspect-[4/5] border border-white/10">
+                </div>
+            </div>
+            <div class="w-full md:w-1/2" data-aos="fade-left">
+                <h2 class="text-5xl font-bold mb-8 text-gold-intense">Hola, Soy Leo</h2>
+                <div class="space-y-6 text-pink-100/90 leading-relaxed font-light text-lg">
+                    <p>Desde hace más de 10 años, el tarot ha sido mi camino y mi forma de guiar a otros. En este tiempo he acompañado a miles de personas a encontrar claridad, sanar heridas y tomar decisiones desde el alma. Cada lectura es un espacio sagrado, donde no hay juicios ni recetas mágicas, solo verdad, intuición y guía.</p>
+                    <p>Aquí no vas a encontrar promesas vacías ni palabras disfrazadas. Solo una conversación honesta, desde el corazón, donde cada carta abre una puerta para entender lo que estás viviendo.</p>
+                    <p class="italic font-serif text-2xl text-gold-intense border-l-2 border-yellow-400 pl-6 py-2">"Si estás aquí, tal vez es porque algo dentro de ti necesita ser escuchado. Y yo estoy listo para ayudarte a verlo con otros ojos."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Steps Section -->
+    <section class="py-24 px-6 text-center relative bg-[#0f020d]">
+        <i class="far fa-moon floating-symbol text-5xl top-10 left-20" style="animation-delay: 3s; opacity: 0.1;"></i>
+
+        <h2 class="text-4xl font-bold mb-20 text-white relative z-10" data-aos="fade-up">¿Cómo reservar tu lectura en 3 pasos?</h2>
+        
+        <div class="container mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+            <div class="service-card p-8 rounded-2xl relative group" data-aos="fade-up" data-aos-delay="100">
+                <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-white text-[#2E0B28] px-6 py-1 rounded-full font-bold text-sm tracking-widest">PASO 1</div>
+                <h3 class="text-xl font-bold mt-6 mb-4 text-gold-intense">Toca el botón</h3>
+                <p class="text-pink-200/70 text-sm">Vas a ir directo a mi WhatsApp, donde ya hay un mensaje listo para que lo envíes.</p>
+                <div class="mt-6 text-3xl text-white opacity-50 group-hover:opacity-100 transition transform group-hover:translate-y-2 duration-300">👇</div>
+            </div>
+            <div class="service-card p-8 rounded-2xl relative group" data-aos="fade-up" data-aos-delay="200">
+                <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-white text-[#2E0B28] px-6 py-1 rounded-full font-bold text-sm tracking-widest">PASO 2</div>
+                <h3 class="text-xl font-bold mt-6 mb-4 text-gold-intense">Elige método de pago</h3>
+                <p class="text-pink-200/70 text-sm">Al final de ese mensaje solo debes escribir tu método de pago (Tarjeta, Paypal, Wester Unión o transferencia si estas en Colombia).</p>
+                <div class="mt-6 text-3xl text-white opacity-50 group-hover:opacity-100 transition transform group-hover:translate-y-2 duration-300">💳</div>
+            </div>
+            <div class="service-card p-8 rounded-2xl relative group" data-aos="fade-up" data-aos-delay="300">
+                <div class="absolute -top-5 left-1/2 transform -translate-x-1/2 bg-white text-[#2E0B28] px-6 py-1 rounded-full font-bold text-sm tracking-widest">PASO 3</div>
+                <h3 class="text-xl font-bold mt-6 mb-4 text-gold-intense">Programación</h3>
+                <p class="text-pink-200/70 text-sm">Luego te pediré unos datos para poder programar tu lectura y comenzaremos tu proceso.</p>
+                <div class="mt-6 text-3xl text-white opacity-50 group-hover:opacity-100 transition transform group-hover:translate-y-2 duration-300">📅</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing / Services Section -->
+    <section id="lecturas-destacadas" class="py-24 px-4 md:px-6 relative">
+        <!-- Floating Symbol -->
+        <i class="fas fa-star floating-symbol text-2xl top-10 left-10 opacity-20"></i>
+
+        <div class="container mx-auto max-w-6xl relative z-10">
+            <p class="text-center text-yellow-50 mb-16 font-serif text-2xl md:text-3xl italic px-4 leading-relaxed drop-shadow-lg" data-aos="fade-in">
+                "Lee las opciones con calma y siente cuál se ajusta mejor a lo que estás viviendo"
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <!-- Card 1 -->
+                <div class="service-card rounded-3xl p-5 md:p-8 border border-white/10 flex flex-col hover:border-yellow-400/40" data-aos="fade-up">
+                    <h3 class="text-2xl font-bold mb-2 text-gold-intense">Lectura Esencial</h3>
+                    <div class="text-3xl font-bold text-white mb-3">$17</div>
+                    <p class="text-pink-100/80 text-sm mb-4">Una Lectura de 5 cartas para analizar las energías de esa persona hacia ti.</p>
+                    <ul class="space-y-2 md:space-y-4 mb-6 text-sm text-gray-200 flex-grow">
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Qué piensa de ti y de lo que vivieron?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Tiene deseos de hablarme o acercarse?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>1 Pregunta libre de tu elección</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>Consejo del tarot.</span></li>
+                    </ul>
+                    <a href="https://api.whatsapp.com/send?phone=%2B573246874533" class="w-full block text-center border border-white/40 text-white py-3 rounded-full hover:bg-white hover:text-[#2E0B28] transition font-bold text-sm uppercase tracking-wide">
+                        ¡Reservar Ahora!
+                    </a>
+                </div>
+                <!-- Card 2 -->
+                <div class="service-card rounded-3xl p-5 md:p-8 border border-yellow-400/40 relative flex flex-col transform lg:-translate-y-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="absolute top-0 right-0 bg-gold-luxury text-[#2E0B28] text-[10px] font-bold px-3 py-1 rounded-bl-xl rounded-tr-2xl shadow-lg uppercase tracking-wider">2da Best</div>
+                    <h3 class="text-2xl font-bold mb-2 text-white">Lectura De Amor</h3>
+                    <div class="text-3xl font-bold text-white mb-3">$30</div>
+                    <p class="text-pink-100/80 text-sm mb-4 leading-snug">Si dudas de lo que siente tu pareja o ex persona especial y no sabes hacia dónde va esta conexión.</p>
+                    <ul class="space-y-2 md:space-y-4 mb-6 text-sm text-pink-50/90 flex-grow">
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Qué piensa realmente de ti?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Qué siente cuando no está contigo?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Qué acciones tomará?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Qué te diría si fuera 100% sincero?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Vale la pena invertir tu energía en el?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>Consejo del tarot.</span></li>
+                    </ul>
+                    <p class="text-[10px] text-purple-300 mb-4 italic opacity-70">*La lectura se envía en formato audio y foto.</p>
+                    <a href="https://api.whatsapp.com/send?phone=%2B573246874533" class="btn-shine bg-gold-luxury w-full block text-center text-[#2E0B28] py-3 rounded-full hover:scale-105 transition font-bold shadow-lg text-sm uppercase tracking-wide">
+                        ¡Esta es mi lectura!
+                    </a>
+                </div>
+                <!-- Card 3 -->
+                <div class="service-card rounded-3xl p-5 md:p-8 border border-white/10 flex flex-col hover:border-yellow-400/40" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-2xl font-bold mb-2 text-gold-intense">Lectura De Estancamiento</h3>
+                    <div class="text-3xl font-bold text-white mb-3">$30</div>
+                    <p class="text-pink-100/80 text-sm mb-4">Descubre por qué no avanzas y qué hacer para recuperar claridad.</p>
+                    <ul class="space-y-2 md:space-y-4 mb-6 text-sm text-gray-200 flex-grow">
+                        <li class="flex gap-3 items-start"><span>¿Por qué me siento tan desmotivada y sin rumbo en este momento?</span></li>
+                        <li class="flex gap-3 items-start"><span>¿Hay un patrón oculto que esté afectando mi equilibrio personal?</span></li>
+                        <li class="flex gap-3 items-start"><span>¿Qué me está impidiendo avanzar?</span></li>
+                        <li class="flex gap-3 items-start"><span>¿Qué me recomiendan las cartas para recuperar dirección?</span></li>
+                        <li class="flex gap-3 items-start"><span>¿Dónde puedo encontrar propósito y fuerza?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>Consejo del tarot.</span></li>
+                    </ul>
+                    <a href="https://api.whatsapp.com/send?phone=%2B573246874533" class="w-full block text-center border border-white/40 text-white py-3 rounded-full hover:bg-white hover:text-[#2E0B28] transition font-bold text-sm uppercase tracking-wide">
+                        ¡Quiero esta lectura!
+                    </a>
+                </div>
+                <!-- Card 4 (Most Chosen) -->
+                <div id="mas-elegida" class="service-card rounded-3xl p-5 md:p-8 border border-yellow-400/60 relative flex flex-col lg:col-span-1 lg:col-start-1 shadow-[0_0_30px_rgba(255,215,0,0.15)]" data-aos="fade-up">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-gold-luxury text-[#2E0B28] text-xs font-bold px-4 py-1 rounded-full shadow-lg uppercase tracking-widest">★ Más elegida</div>
+                    <h3 class="text-2xl font-bold mb-2 mt-2 text-white">Lectura Profunda Ex Pareja</h3>
+                    <div class="text-3xl font-bold text-gold-intense mb-3">$40</div>
+                    <p class="text-pink-100/80 text-sm mb-4">Profundizaremos en la situación con tu ex pareja para entender cada detalle.</p>
+                    <ul class="space-y-2 md:space-y-4 mb-6 text-sm text-gray-100 flex-grow">
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Qué siente ahora que todo terminó?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Qué te confesaría si se atreviera?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Existe un futuro para nosotros?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Hay una tercera persona en todo esto?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Qué me impide soltar esta historia?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Cómo puedo recuperar mi paz emocional?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>¿Vale la pena luchar o es momento de soltar?</span></li>
+                        <li class="flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>Consejo del tarot.</span></li>
+                    </ul>
+                    <a href="https://api.whatsapp.com/send?phone=%2B573246874533" class="btn-shine bg-gold-luxury w-full block text-center text-[#2E0B28] py-3 rounded-full hover:scale-105 transition font-bold shadow-lg text-sm uppercase tracking-wide">
+                        ¡Quiero Respuestas!
+                    </a>
+                </div>
+                <!-- Card 5 (Full Width) -->
+                <div class="service-card rounded-3xl p-5 md:p-8 border border-white/10 flex flex-col lg:col-span-2 hover:border-yellow-400/40 transition" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex flex-col h-full">
+                        <div class="flex flex-col md:flex-row justify-between items-start mb-4">
+                             <div>
+                                <h3 class="text-2xl font-bold mb-2 text-gold-intense">Lectura Energías y Bloqueos</h3>
+                                <p class="text-pink-100/80 text-sm mb-4 max-w-md">Esta lectura está diseñada para ayudarte a entender qué está afectando tu energía, si hay influencias externas y como podrías liberarte de ellas?</p>
+                             </div>
+                             <div class="text-3xl font-bold text-white mb-4 md:mb-0">$45</div>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-sm text-gray-300 mb-8 flex-grow">
+                            <p class="flex gap-3 items-start"><span>¿Qué está pasando con mi energía ahora mismo?</span></p>
+                            <p class="flex gap-3 items-start"><span>¿Hay alguien o algo afectando mi equilibrio?</span></p>
+                            <p class="flex gap-3 items-start"><span>¿Cómo puedo protegerme de lo que me está afectando?</span></p>
+                            <p class="flex gap-3 items-start"><span>¿Lo que siento es real o es solo miedo o ansiedad?</span></p>
+                            <p class="flex gap-3 items-start"><span>¿Qué necesito para volver a sentirme bien?</span></p>
+                            <p class="flex gap-3 items-start"><span>¿Qué parte de mí necesita más atención en este momento?</span></p>
+                            <p class="flex gap-3 items-start"><span>¿Qué estoy haciendo sin darme cuenta que me está drenando?</span></p>
+                            <p class="font-bold text-white flex gap-3 items-start"><span class="text-yellow-400 mt-0.5">✔</span> <span>2 Preguntas libres de tu elección.</span></p>
+                        </div>
+                        <a href="https://api.whatsapp.com/send?phone=%2B573246874533" class="w-full block text-center border border-white/40 text-white py-3 rounded-full hover:bg-white hover:text-[#2E0B28] transition font-bold text-sm uppercase tracking-wide mt-auto">
+                            ¡Quiero esta lectura!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Selection Section -->
+    <section class="py-24 px-6 text-center relative overflow-hidden">
+        <div class="container mx-auto max-w-2xl relative z-10" data-aos="fade-up">
+            <h2 class="text-3xl font-bold mb-6 text-white">¿NO SABES QUE LECTURA ELEGIR?</h2>
+            <p class="text-pink-100/80 mb-4 font-light text-lg">Tranquila… Si después de leer las opciones sientes que tu situación es distinta o más compleja, escríbeme.</p>
+            <p class="text-pink-100/80 mb-10 font-light text-lg">Te puedo ayudar a elegir la lectura que más se ajuste, o podemos crear una personalizada. <strong class="text-gold-intense">Solo compárteme un poco de tu historia y yo me encargaré del resto.</strong></p>
+            <a href="https://api.whatsapp.com/send?phone=%2B573246874533" class="btn-shine inline-block bg-white text-[#2E0B28] px-8 py-4 rounded-full text-lg font-bold hover:scale-105 transition shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                ¡Ayúdame a elegir mi lectura!
+            </a>
+            <p class="text-xs text-purple-300 mt-6">✨ Al hacer clic, irás directo a mi WhatsApp.</p>
+        </div>
+    </section>
+
+    <!-- Honesty Section -->
+    <section class="py-24 px-6 bg-[#1a0518]/50 text-center border-y border-white/5 relative backdrop-blur-sm">
+        <div class="container mx-auto max-w-3xl relative z-10" data-aos="zoom-in">
+            <h2 class="text-4xl font-bold mb-8 text-gold-intense">Te voy a ser honesto</h2>
+            <p class="text-lg text-pink-100/90 mb-6 leading-relaxed font-light">
+                Puedes seguir viendo mis videos, esperando a que "algún día" te animes, o puedes dar el paso hoy y tener <strong class="text-white">tu respuesta.</strong>
+            </p>
+            <p class="text-lg text-pink-100/90 mb-6 leading-relaxed font-light">
+                No te voy a mentir con que "tienes 24 horas para decidir" o cosas así. La verdad es simple: <strong class="text-white">si sientes que es tu momento, probablemente lo es.</strong>
+            </p>
+            <p class="text-lg text-pink-100/90 mb-12 leading-relaxed font-light">
+                He visto a muchas personas que se quedan en el "después lo hago" durante meses... y después me escriben diciendo "ojalá hubiera pedido mi lectura antes."
+            </p>
+            <h3 class="text-2xl font-bold mb-10 text-white">Tú sabes si estás lista.</h3>
+            <a href="https://api.whatsapp.com/send?phone=%2B573246874533" class="btn-shine inline-block bg-gold-luxury text-[#2E0B28] px-12 py-4 rounded-full text-xl font-bold hover:scale-105 transition transform hover:-translate-y-1 shadow-[0_0_30px_rgba(255,215,0,0.4)]">
+                ¡ESTOY LISTA!
+            </a>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 px-6 relative overflow-hidden">
+        <div class="container mx-auto text-center mb-16">
+            <h2 class="text-3xl font-bold text-gold-intense" data-aos="fade-up">Estos son algunos Testimonios:</h2>
+            <div class="section-divider"></div>
+        </div>
+        <div class="flex flex-wrap justify-center gap-8 container mx-auto">
+            <img src="https://framerusercontent.com/images/G5MdIr96tLDdHDlOtQWLoXTznA0.png?width=1088&height=775" class="w-full max-w-sm rounded-xl shadow-2xl opacity-90 hover:opacity-100 transition duration-500 border border-white/10 hover:border-yellow-500/50" data-aos="fade-up" alt="Testimonio 1">
+            <img src="https://framerusercontent.com/images/kYwCQixfCMGEPb3W73h4NlhMQ.png?width=1084&height=1134" class="w-full max-w-sm rounded-xl shadow-2xl opacity-90 hover:opacity-100 transition duration-500 border border-white/10 hover:border-yellow-500/50" data-aos="fade-up" data-aos-delay="100" alt="Testimonio 2">
+            <img src="https://framerusercontent.com/images/QCkfkzZbL3uC0wpf6zXHt2fZNI.png?width=1087&height=940" class="w-full max-w-sm rounded-xl shadow-2xl opacity-90 hover:opacity-100 transition duration-500 border border-white/10 hover:border-yellow-500/50" data-aos="fade-up" data-aos-delay="200" alt="Testimonio 3">
+        </div>
+        <div class="text-center mt-16">
+            <a href="https://api.whatsapp.com/send?phone=%2B573246874533" class="btn-shine inline-block bg-white text-[#2E0B28] px-8 py-3 rounded-full font-bold hover:bg-yellow-50 transition shadow-lg uppercase tracking-wide">
+                ¡Quiero mi lectura ahora!
+            </a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 px-6">
+        <div class="container mx-auto max-w-3xl">
+            <h2 class="text-3xl font-bold mb-16 text-center text-white" data-aos="fade-up">Tienes dudas:</h2>
+
+            <div class="space-y-4" id="faq-container">
+                <div class="border border-white/10 rounded-xl bg-[#2E0B28]/40 backdrop-blur-md hover:bg-[#3b0d36]/50 transition duration-300" data-aos="fade-up">
+                    <button class="w-full text-left p-6 flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg text-yellow-100">¿Cómo es el proceso de pago?</span>
+                        <span class="transform transition-transform duration-300 text-yellow-400">▼</span>
+                    </button>
+                    <div class="accordion-content px-6">
+                        <div class="pb-6 text-pink-100/80 leading-relaxed font-light">
+                            Una vez elijas tu lectura y presiones el botón de Reservar ahora, serás dirigido a mi WhatsApp. Ahí solo debes decirme cuál es tu método de pago. Luego te enviaré un enlace para que puedas pagar con tarjeta, o te indicaré cómo hacerlo por Western Union o banco nacional. Elige el método que te quede más fácil y apenas confirmes tu pago, agendamos tu lectura.
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-white/10 rounded-xl bg-[#2E0B28]/40 backdrop-blur-md hover:bg-[#3b0d36]/50 transition duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <button class="w-full text-left p-6 flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg text-yellow-100">¿Cómo reservo mi lectura privada?</span>
+                        <span class="transform transition-transform duration-300 text-yellow-400">▼</span>
+                    </button>
+                    <div class="accordion-content px-6">
+                        <div class="pb-6 text-pink-100/80 leading-relaxed font-light">
+                            Muy fácil. Solo tienes que elegir la lectura que más conecte contigo. Justo debajo de la descripción de esa lectura verás un botón que dice “Reservar mi lectura”. Dale clic ahí, y serás redirigido directamente a mi WhatsApp. Ahí hablaremos tú y yo personalmente para dejar todo listo.
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-white/10 rounded-xl bg-[#2E0B28]/40 backdrop-blur-md hover:bg-[#3b0d36]/50 transition duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <button class="w-full text-left p-6 flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg text-yellow-100">¿Puedo hacer preguntas específicas?</span>
+                        <span class="transform transition-transform duration-300 text-yellow-400">▼</span>
+                    </button>
+                    <div class="accordion-content px-6">
+                        <div class="pb-6 text-pink-100/80 leading-relaxed font-light">
+                            Sí, claro que sí. Puedes hacer las preguntas que tú quieras. Las que aparecen como ejemplo en cada lectura son totalmente personalizadas y están pensadas para ayudarte, pero si sientes que conectas con esas mismas, también podemos usarlas tal cual.
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-white/10 rounded-xl bg-[#2E0B28]/40 backdrop-blur-md hover:bg-[#3b0d36]/50 transition duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <button class="w-full text-left p-6 flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg text-yellow-100">¿Qué incluye exactamente mi lectura?</span>
+                        <span class="transform transition-transform duration-300 text-yellow-400">▼</span>
+                    </button>
+                    <div class="accordion-content px-6">
+                        <div class="pb-6 text-pink-100/80 leading-relaxed font-light">
+                            Tu lectura es completa y personalizada. Vas a recibir: Una foto real de la tirada y 2 audios grabados por mí, donde te explico lo que revelan tus cartas y las señales clave, además de consejos y posibles caminos a seguir.
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-white/10 rounded-xl bg-[#2E0B28]/40 backdrop-blur-md hover:bg-[#3b0d36]/50 transition duration-300" data-aos="fade-up" data-aos-delay="400">
+                    <button class="w-full text-left p-6 flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg text-yellow-100">¿Cuándo recibiré mi lectura?</span>
+                        <span class="transform transition-transform duration-300 text-yellow-400">▼</span>
+                    </button>
+                    <div class="accordion-content px-6">
+                        <div class="pb-6 text-pink-100/80 leading-relaxed font-light">
+                           Tu lectura será entregada entre 24 y 48 horas hábiles después de hacer tu reserva. Siempre me esfuerzo por que la recibas lo antes posible, con la energía fresca y bien canalizada.
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-white/10 rounded-xl bg-[#2E0B28]/40 backdrop-blur-md hover:bg-[#3b0d36]/50 transition duration-300" data-aos="fade-up" data-aos-delay="500">
+                    <button class="w-full text-left p-6 flex justify-between items-center focus:outline-none" onclick="toggleAccordion(this)">
+                        <span class="font-bold text-lg text-yellow-100">¿Las lecturas son confidenciales?</span>
+                        <span class="transform transition-transform duration-300 text-yellow-400">▼</span>
+                    </button>
+                    <div class="accordion-content px-6">
+                        <div class="pb-6 text-pink-100/80 leading-relaxed font-light">
+                            Totalmente. Nadie más va a ver ni escuchar tu lectura. Lo que me compartes se queda entre tú, tus cartas y yo. Es un espacio seguro.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 text-center bg-[#050005] border-t border-white/10 text-pink-200/50 text-sm relative z-10">
+        <p>TAROSCOPO® 2024. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Accordion Logic
+        function toggleAccordion(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('span:last-child');
+            document.querySelectorAll('.accordion-content').forEach(item => {
+                if (item !== content && item.style.maxHeight) {
+                    item.style.maxHeight = null;
+                    item.classList.remove('active');
+                    item.previousElementSibling.querySelector('span:last-child').style.transform = 'rotate(0deg)';
+                }
+            });
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                content.classList.remove('active');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+                content.classList.add('active');
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+</body>
+</html>
