@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loto Spa Barranquilla - Santuario Urbano</title>
+    <!-- Carga de Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Carga de Lucide Icons (para los íconos) -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Configuración y Estilos Personalizados -->
+    <style>
+        /* Tipografía: Playfair Display para títulos, Lato para el cuerpo */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lato:wght@300;400;700&display=swap');
+        
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .font-sans { font-family: 'Lato', sans-serif; }
+
+        /* Estilo para el fondo animado (Efecto de Niebla/Agua) */
+        #hero-bg-animated {
+            animation: subtle-move 40s infinite alternate ease-in-out;
+            transform-origin: center center;
+            filter: blur(5px) brightness(0.8); /* Oscurece y difumina el fondo */
+        }
+
+        /* Definición de la animación */
+        @keyframes subtle-move {
+            0% { transform: scale(1.05) translate(0%, 0%); }
+            50% { transform: scale(1.1) translate(1%, -1%); }
+            100% { transform: scale(1.05) translate(-1%, 1%); }
+        }
+
+        /* Ocultar scrollbar sin afectar la funcionalidad (opcional) */
+        ::-webkit-scrollbar { display: none; }
+        html { scroll-behavior: smooth; }
+    </style>
+</head>
+
+<body class="font-sans text-stone-600 antialiased bg-stone-50 selection:bg-emerald-800 selection:text-white">
+
+    <!-- --- HEADER --- -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent py-6">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 cursor-pointer" onclick="scrollToSection('hero')">
+                <span id="logo-text" class="text-2xl font-serif font-bold tracking-widest text-emerald-900 md:text-white transition-colors duration-300">
+                    LOTO SPA
+                </span>
+            </div>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex gap-8 items-center">
+                <a onclick="scrollToSection('tour')" class="nav-link text-sm uppercase tracking-widest font-medium hover:text-amber-600 transition-colors cursor-pointer text-white/90">Experiencia 360</a>
+                <a onclick="scrollToSection('servicios')" class="nav-link text-sm uppercase tracking-widest font-medium hover:text-amber-600 transition-colors cursor-pointer text-white/90">Servicios</a>
+                <a onclick="scrollToSection('ubicacion')" class="nav-link text-sm uppercase tracking-widest font-medium hover:text-amber-600 transition-colors cursor-pointer text-white/90">Ubicación</a>
+                <a onclick="scrollToSection('contacto')" class="nav-link text-sm uppercase tracking-widest font-medium hover:text-amber-600 transition-colors cursor-pointer text-white/90">Contacto</a>
+                <button class="bg-amber-600 hover:bg-amber-700 text-white px-6 py-2 rounded-full text-sm font-bold tracking-wider transition-all transform hover:scale-105 shadow-lg">
+                    RESERVAR
+                </button>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-button" class="md:hidden text-amber-600">
+                <i data-lucide="menu" id="menu-icon"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Overlay -->
+        <div id="mobile-nav" class="hidden absolute top-full left-0 w-full bg-white shadow-xl py-8 px-6 flex-col gap-6 items-center border-t border-stone-100">
+            <a onclick="scrollToSection('tour'); toggleMenu(false);" class="text-stone-800 text-lg font-serif font-medium cursor-pointer">Experiencia 360</a>
+            <a onclick="scrollToSection('servicios'); toggleMenu(false);" class="text-stone-800 text-lg font-serif font-medium cursor-pointer">Servicios</a>
+            <a onclick="scrollToSection('ubicacion'); toggleMenu(false);" class="text-stone-800 text-lg font-serif font-medium cursor-pointer">Ubicación</a>
+            <a onclick="scrollToSection('contacto'); toggleMenu(false);" class="text-stone-800 text-lg font-serif font-medium cursor-pointer">Contacto</a>
+            <button class="bg-emerald-900 text-white w-full py-3 rounded-lg mt-2">
+                Agendar Cita
+            </button>
+        </div>
+    </header>
+
+    <!-- --- HERO SECTION --- -->
+    <section id="hero" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <!-- Background Image with ANIMATION -->
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=2070&auto=format&fit=crop" 
+                alt="Spa Ambiente" 
+                id="hero-bg-animated"
+                class="w-full h-full object-cover"
+            />
+            <!-- Overlay oscuro para mejorar contraste -->
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-stone-900/80"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-6 max-w-4xl mx-auto mt-16">
+            <span class="block text-amber-400 tracking-[0.3em] text-sm md:text-base font-bold mb-4">
+                BARRANQUILLA, COLOMBIA
+            </span>
+            <h1 class="text-5xl md:text-7xl font-serif text-white font-medium mb-6 leading-tight drop-shadow-lg">
+                El Santuario Urbano <br/> <i class="font-thin italic">para tus sentidos</i>
+            </h1>
+            <p class="text-stone-200 text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto leading-relaxed">
+                Desconecta del caos de la ciudad y sumérgete en una experiencia de relajación absoluta en Loto Spa.
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button 
+                    onclick="scrollToSection('tour')"
+                    class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-full font-medium hover:bg-white hover:text-emerald-900 transition-all duration-300 flex items-center justify-center gap-2 group transform hover:scale-105"
+                >
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    Ver Instalaciones
+                </button>
+                <button class="bg-amber-600 text-white px-8 py-4 rounded-full font-medium hover:bg-amber-700 transition-all shadow-lg shadow-amber-900/20 transform hover:scale-105">
+                    Agendar Visita
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- VIRTUAL TOUR SECTION (The Core) --- -->
+    <section id="tour" class="py-24 bg-stone-900 relative">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-5xl font-serif text-white mb-4">Recorrido Virtual</h2>
+                <div class="w-24 h-1 bg-amber-600 mx-auto mb-6"></div>
+                <p class="text-stone-400 max-w-2xl mx-auto text-lg">
+                    La transparencia es nuestro lujo. Explora cada rincón de nuestras instalaciones antes de tu llegada. Camina, observa y siente la atmósfera.
+                </p>
+            </div>
+
+            <!-- Iframe Wrapper with High-End styling -->
+            <div class="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-2xl overflow-hidden shadow-2xl border border-stone-700 group">
+                <div class="absolute inset-0 pointer-events-none border-[1px] border-white/10 z-20 rounded-2xl"></div>
+                <iframe 
+                    src="https://tour.panoee.net/lotospa/690f5ade9709fe8e6e881bf9" 
+                    class="w-full h-full bg-stone-800"
+                    frameborder="0"
+                    allowfullscreen
+                    loading="lazy"
+                    title="Loto Spa Virtual Tour"
+                ></iframe>
+                
+                <!-- Interactive hint overlay -->
+                <div class="absolute bottom-6 right-6 bg-black/60 backdrop-blur-md text-white px-4 py-2 rounded-lg text-xs tracking-wider z-20 pointer-events-none border border-white/10">
+                    CLICK & DRAG PARA EXPLORAR 360°
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <p class="text-stone-500 text-sm">Desarrollado con tecnología Panoee</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- SERVICES SECTION --- -->
+    <section id="servicios" class="py-24 bg-stone-50">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16">
+                <div class="max-w-xl">
+                    <span class="text-amber-600 font-bold tracking-widest text-sm uppercase mb-2 block">Nuestros Rituales</span>
+                    <h2 class="text-4xl md:text-5xl font-serif text-emerald-950 leading-tight">Diseñado para restaurar <br/>tu equilibrio.</h2>
+                </div>
+                <button class="hidden md:flex items-center gap-2 text-emerald-900 border-b border-emerald-900 pb-1 hover:text-amber-600 hover:border-amber-600 transition-all mt-6 md:mt-0 transform hover:scale-105">
+                    Ver Menú Completo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group cursor-pointer border border-stone-100 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-stone-100 rounded-full flex items-center justify-center mb-8 group-hover:bg-amber-100 transition-colors">
+                        <i data-lucide="wind" class="text-stone-600 group-hover:text-amber-700 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif text-emerald-950 mb-4">Masajes Terapéuticos</h3>
+                    <p class="text-stone-500 leading-relaxed mb-6">
+                        Desde piedras volcánicas hasta tejido profundo. Liberamos la tensión acumulada devolviendo la movilidad y la paz a tu cuerpo.
+                    </p>
+                    <span class="text-amber-700 font-medium text-sm tracking-wider uppercase group-hover:underline">Detalles</span>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group cursor-pointer border border-stone-100 relative overflow-hidden transform hover:-translate-y-1">
+                    <!-- Accent line -->
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-800 to-amber-600"></div>
+                    <div class="w-14 h-14 bg-stone-100 rounded-full flex items-center justify-center mb-8 group-hover:bg-amber-100 transition-colors">
+                        <i data-lucide="sparkles" class="text-stone-600 group-hover:text-amber-700 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif text-emerald-950 mb-4">Rituales Faciales</h3>
+                    <p class="text-stone-500 leading-relaxed mb-6">
+                        Tratamientos de hidratación profunda y rejuvenecimiento utilizando productos orgánicos de alta gama.
+                    </p>
+                    <span class="text-amber-700 font-medium text-sm tracking-wider uppercase group-hover:underline">Detalles</span>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 group cursor-pointer border border-stone-100 transform hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-stone-100 rounded-full flex items-center justify-center mb-8 group-hover:bg-amber-100 transition-colors">
+                        <i data-lucide="droplet" class="text-stone-600 group-hover:text-amber-700 w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-2xl font-serif text-emerald-950 mb-4">Zona Húmeda</h3>
+                    <p class="text-stone-500 leading-relaxed mb-6">
+                        Sumérgete en nuestro jacuzzi y disfruta de nuestras áreas de hidroterapia diseñadas para purificar toxinas.
+                    </p>
+                    <span class="text-amber-700 font-medium text-sm tracking-wider uppercase group-hover:underline">Detalles</span>
+                </div>
+            </div>
+            
+            <button class="md:hidden mt-8 w-full py-4 border border-emerald-900 text-emerald-900 rounded-lg font-medium">
+                Ver Menú Completo
+            </button>
+        </div>
+    </section>
+
+    <!-- --- IMAGE GRID / AESTHETIC --- -->
+    <section class="py-2 bg-white">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2 px-2">
+            <div class="h-64 md:h-80 overflow-hidden rounded-lg group">
+                <img src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?q=80&w=2070&auto=format&fit=crop" alt="Detalle 1" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400/36454F/FFFFFF?text=Foto+Placeholder'" />
+            </div>
+            <div class="h-64 md:h-80 overflow-hidden rounded-lg group">
+                <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?q=80&w=2070&auto=format&fit=crop" alt="Detalle 2" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400/36454F/FFFFFF?text=Foto+Placeholder'" />
+            </div>
+            <div class="h-64 md:h-80 overflow-hidden rounded-lg group relative">
+                <div class="absolute inset-0 bg-emerald-900/80 flex items-center justify-center flex-col text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
+                    <i data-lucide="instagram" class="w-6 h-6 mb-2"></i>
+                    <span class="font-serif italic text-lg">@LotoSpaBarranquilla</span>
+                </div>
+                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop" alt="Detalle 3" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400/36454F/FFFFFF?text=Foto+Placeholder'" />
+            </div>
+            <!-- Imagen 4 Corregida -->
+            <div class="h-64 md:h-80 overflow-hidden rounded-lg group">
+                <img src="https://images.unsplash.com/photo-1531835551805-16d864c8d311?q=80&w=2070&auto=format&fit=crop" alt="Detalle 4" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null;this.src='https://placehold.co/600x400/36454F/FFFFFF?text=Foto+Placeholder'" />
+            </div>
+        </div>
+    </section>
+
+    <!-- --- LOCATION SECTION --- -->
+    <section id="ubicacion" class="py-20 bg-stone-50 border-t border-stone-200">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                
+                <!-- Text Content -->
+                <div class="w-full lg:w-1/2">
+                    <div class="inline-flex items-center gap-2 text-amber-600 font-bold tracking-widest text-sm uppercase mb-4">
+                        <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        <span>Cómo Llegar</span>
+                    </div>
+                    <h2 class="text-4xl font-serif text-emerald-950 mb-6">Ubicación Privilegiada <br/>en Riomar</h2>
+                    <p class="text-stone-500 text-lg leading-relaxed mb-8">
+                        Encuéntranos en una de las zonas más exclusivas y tranquilas de Barranquilla. Un oasis de calma accesible desde cualquier punto de la ciudad.
+                    </p>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-stone-100 mb-8">
+                        <div class="flex items-start gap-4 mb-4">
+                            <div class="bg-emerald-100 p-3 rounded-full text-emerald-800">
+                                <i data-lucide="map" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-serif text-emerald-950 text-xl">Dirección</h4>
+                                <p class="text-stone-600">Cl. 86 #49c-34, Riomar,<br/>Barranquilla, Atlántico</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a 
+                        href="https://maps.app.goo.gl/GJANYXWPbEH5Gkdo7" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="inline-flex items-center gap-3 bg-emerald-900 text-white px-8 py-4 rounded-full font-medium hover:bg-emerald-800 transition-all shadow-lg hover:shadow-xl group transform hover:scale-[1.02]"
+                    >
+                        <i data-lucide="navigation" class="w-5 h-5"></i>
+                        Cómo llegar desde el Aeropuerto
+                        <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+
+                <!-- Map Visual -->
+                <div class="w-full lg:w-1/2 h-96 rounded-2xl overflow-hidden shadow-2xl border border-stone-200 relative group">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3916.264426578964!2d-74.8080!3d11.0180!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8ef42d65a88c2223%3A0x6291535450849206!2sCl.%2086%20%2349c-34%2C%20Norte-Centro%20Hist%C3%B3rico%2C%20Barranquilla%2C%20Atl%C3%A1ntico!5e0!3m2!1ses!2sco!4v1709228000000!5m2!1ses!2sco" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        class="grayscale hover:grayscale-0 transition-all duration-700"
+                        title="Mapa de Ubicación"
+                    ></iframe>
+                    
+                    <div class="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-lg text-xs font-bold text-emerald-900 shadow-lg pointer-events-none">
+                        BARRIO RIOMAR
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- --- CONTACT & FOOTER --- -->
+    <footer id="contacto" class="bg-emerald-950 text-stone-300 pt-20 pb-10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16 border-b border-white/10 pb-12">
+                
+                <!-- Brand -->
+                <div>
+                    <h3 class="text-3xl font-serif text-white mb-6">LOTO SPA</h3>
+                    <p class="text-stone-400 mb-6 leading-relaxed">
+                        Un espacio sagrado en Barranquilla dedicado al bienestar integral. Permítenos cuidar de ti.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-amber-600 flex items-center justify-center transition-colors text-white">
+                            <i data-lucide="instagram" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-amber-600 flex items-center justify-center transition-colors text-white">
+                            <i data-lucide="facebook" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Info -->
+                <div>
+                    <h4 class="text-white font-medium tracking-widest uppercase mb-6 text-sm">Visítanos</h4>
+                    <ul class="space-y-4">
+                        <li class="flex gap-4 items-start">
+                            <i data-lucide="map-pin" class="text-amber-600 mt-1 flex-shrink-0 w-5 h-5"></i>
+                            <span>Cl. 86 #49c-34, Riomar,<br/>Barranquilla, Atlántico</span>
+                        </li>
+                        <li class="flex gap-4 items-center">
+                            <i data-lucide="phone" class="text-amber-600 flex-shrink-0 w-5 h-5"></i>
+                            <span>+57 (300) 123-4567</span>
+                        </li>
+                        <li class="flex gap-4 items-center">
+                            <i data-lucide="clock" class="text-amber-600 flex-shrink-0 w-5 h-5"></i>
+                            <span>Lun - Sáb: 9:00 AM - 7:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- CTA -->
+                <div class="bg-white/5 p-8 rounded-2xl border border-white/5">
+                    <h4 class="text-white font-serif text-xl mb-4">¿Listo para tu momento?</h4>
+                    <p class="text-stone-400 text-sm mb-6">Reserva tu cita hoy y recibe un 10% de descuento en tu primer ritual de hidroterapia.</p>
+                    <button class="w-full bg-white text-emerald-950 py-3 rounded-lg font-bold hover:bg-amber-500 hover:text-white transition-all transform hover:scale-[1.02]">
+                        AGENDAR AHORA
+                    </button>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center text-xs text-stone-500">
+                <p>&copy; 2024 Loto Spa Barranquilla. Todos los derechos reservados.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Política de Privacidad</a>
+                    <a href="#" class="hover:text-white transition-colors">Términos de Servicio</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts de JavaScript Nativo para funcionalidad de la página -->
+    <script>
+        // Inicializa los íconos de Lucide
+        lucide.createIcons();
+
+        // Variables de estado
+        let isMenuOpen = false;
+        const mainHeader = document.getElementById('main-header');
+        const logoText = document.getElementById('logo-text');
+        const mobileNav = document.getElementById('mobile-nav');
+        const menuButton = document.getElementById('menu-button');
+        const navLinks = document.querySelectorAll('.nav-link');
+        let menuIcon = document.getElementById('menu-icon');
+
+        /**
+         * Maneja el cambio de estilo del Header al hacer scroll.
+         */
+        function handleScroll() {
+            const isScrolled = window.scrollY > 50;
+            
+            // Cambio de estilos del Header
+            mainHeader.classList.toggle('bg-white', isScrolled);
+            mainHeader.classList.toggle('shadow-md', isScrolled);
+            mainHeader.classList.toggle('py-3', isScrolled);
+            mainHeader.classList.toggle('bg-transparent', !isScrolled);
+            mainHeader.classList.toggle('py-6', !isScrolled);
+
+            // Cambio de estilos del Logo
+            logoText.classList.toggle('text-white', !isScrolled);
+            logoText.classList.toggle('text-emerald-900', isScrolled);
+
+            // Cambio de estilos de los enlaces de navegación
+            navLinks.forEach(link => {
+                link.classList.toggle('text-white/90', !isScrolled);
+                link.classList.toggle('text-stone-600', isScrolled);
+            });
+        }
+
+        /**
+         * Realiza el scroll suave a la sección objetivo.
+         * @param {string} id - ID de la sección.
+         */
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                // Cierra el menú móvil si estaba abierto
+                toggleMenu(false); 
+            }
+        }
+
+        /**
+         * Abre o cierra el menú móvil.
+         * @param {boolean} [forceState] - Fuerza el estado (true para abrir, false para cerrar).
+         */
+        function toggleMenu(forceState) {
+            isMenuOpen = (typeof forceState === 'boolean') ? forceState : !isMenuOpen;
+            
+            mobileNav.classList.toggle('flex-col', isMenuOpen);
+            mobileNav.classList.toggle('hidden', !isMenuOpen);
+
+            // Actualiza el ícono (Menú o X)
+            menuButton.innerHTML = isMenuOpen 
+                ? '<i data-lucide="x" class="w-7 h-7"></i>' 
+                : '<i data-lucide="menu" class="w-7 h-7"></i>';
+            lucide.createIcons(); // Vuelve a renderizar el nuevo ícono
+        }
+
+        // --- Event Listeners ---
+        window.addEventListener('scroll', handleScroll);
+        
+        menuButton.addEventListener('click', () => toggleMenu());
+        
+        // Ejecutar handleScroll al cargar para aplicar el estilo inicial si no estamos en el top
+        handleScroll(); 
+    </script>
+</body>
+</html>
